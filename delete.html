@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Mini Project</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="http://login2explore.com/jpdb/resources/js/0.0.3/jpdb-commons.js"></script>
+
+    </head>
+    <body>
+    <center><h1>Delete Data</h1></center>
+    <center><h3>(Enter Your StudentId )</h3></center>
+    <center><input id="stdId" maxlength="50" placeholder="Student Id" name="stdId" type="text" /><br><br>
+        <input type="button" value="DELETE DATA" onclick="deleteData();"/></center>
+    <p id="view"></p>
+    <script>
+        function deleteData(){
+            var token = "90939355|-31949287544704680|90939620";
+            var dbname = "STUDENT";
+            var relationName = "MYDATA-REL";
+            var stdId = parseInt(document.getElementById("stdId").value);
+            var delReqStr = createREMOVERecordRequest(token, dbname, relationName, stdId);
+            alert(delReqStr);
+            jQuery.ajaxSetup({async: false});
+            var resultObj = executeCommandAtGivenBaseUrl(delReqStr,
+                    "http://api.login2explore.com:5577", "/api/iml");
+            jQuery.ajaxSetup({async: true});
+            alert(JSON.stringify(resultObj));
+            
+        }
+    </script>
+    </body>
+</html>
