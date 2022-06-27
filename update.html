@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Mini Project</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="http://login2explore.com/jpdb/resources/js/0.0.3/jpdb-commons.js"></script>
+
+    </head>
+    <body>
+    <center><h1>Update Data</h1></center>
+    <center><input id=stdId maxlength="50" placeholder="StudentId" name="stdId" type="text" /><br><br>
+        <p>You can change your password only.</p>
+        <input id="stdPass" maxlength="50" placeholder="Password" name="stdPass" type="password" /><br><br>
+        <input type="button" value="Update Data" onclick="updateData();"/></center>
+    <p id="show"></p>
+    <script>
+        function updateData(){
+            var token = "90939355|-31949287544704680|90939620;
+            var dbname = "STUDENT";
+            var relationName = "MYDATA-REL";
+            var stdId = parseInt(document.getElementById("stdId").value);
+            
+            var jsonObj = {
+                Password : stdPass
+            };
+            var upReqStr = createUPDATERecordRequest(token, JSON.stringify(jsonObj), dbname, relationName, stdId);
+            alert(upReqStr);
+            jQuery.ajaxSetup({async: false});
+            var resultObj = executeCommandGivenBaseUrl(upReqStr,
+                    "http://api.login2explore.com:5577", "/api/iml");
+            jQuery.ajaxSetup({async: true});
+            alert(JSON.stringify(resultObj));
+            
+        }
+    </script>
+    </body>
+</html>
